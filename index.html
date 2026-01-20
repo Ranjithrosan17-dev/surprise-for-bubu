@@ -225,41 +225,6 @@
             }
         }
 
-        /* ==================== MUSIC CONTROL ==================== */
-        .music-control {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.5rem;
-        }
-
-        .music-control:hover {
-            background: var(--primary);
-            transform: scale(1.1) rotate(10deg);
-            box-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
-        }
-
-        .music-control.playing {
-            animation: musicPulse 1s infinite;
-        }
-
-        @keyframes musicPulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 157, 0.5); }
-            50% { box-shadow: 0 0 0 15px rgba(255, 107, 157, 0); }
-        }
-
         /* ==================== SECTIONS ==================== */
         .section {
             min-height: 100vh;
@@ -1497,11 +1462,6 @@
     <!-- Fireworks Canvas -->
     <canvas id="fireworks-canvas"></canvas>
 
-    <!-- Music Control -->
-    <div class="music-control" id="musicControl" onclick="toggleMusic()">
-        🎵
-    </div>
-
     <!-- ==================== WELCOME SECTION ==================== -->
     <section class="section" id="welcome">
         <div class="welcome-content">
@@ -1831,11 +1791,6 @@ May this new chapter of your life be filled with magical surprises, unforgettabl
         </div>
     </section>
 
-    <!-- Background Music -->
-    <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
-
     <script>
         // ==================== PRELOADER ====================
         window.addEventListener('load', () => {
@@ -1970,21 +1925,6 @@ May this new chapter of your life be filled with magical surprises, unforgettabl
             setTimeout(() => trail.remove(), 1000);
         }
 
-        // ==================== MUSIC ====================
-        const bgMusic = document.getElementById('bgMusic');
-        let isMusicPlaying = false;
-
-        function toggleMusic() {
-            if (isMusicPlaying) {
-                bgMusic.pause();
-                document.getElementById('musicControl').classList.remove('playing');
-            } else {
-                bgMusic.play();
-                document.getElementById('musicControl').classList.add('playing');
-            }
-            isMusicPlaying = !isMusicPlaying;
-        }
-
         // ==================== NAVIGATION ====================
         function scrollToSection(sectionId) {
             document.getElementById(sectionId).scrollIntoView({ 
@@ -1996,12 +1936,6 @@ May this new chapter of your life be filled with magical surprises, unforgettabl
         // ==================== START EXPERIENCE ====================
         function startExperience() {
             scrollToSection('envelope-section');
-            
-            // Try to autoplay music
-            bgMusic.play().then(() => {
-                isMusicPlaying = true;
-                document.getElementById('musicControl').classList.add('playing');
-            }).catch(() => {});
         }
 
         // ==================== ENVELOPE ====================
